@@ -17,3 +17,15 @@ for x in df['vacina_fabricante_referencia'].drop_duplicates().dropna().index:
 
 #Trata resto de valores faltantes na coluna 'vacina_fabricante_referencia'
 df['vacina_fabricante_referencia'].fillna('Sem Referência', inplace=True)
+
+#Solicita dados de conexão com banco de dados MYSQL
+DB = input('Digite o nome do banco MYSQL:')
+SERVER = input('Digite o nome do servidor do banco MYSQL:')
+USER = input('Digite o nome do usuário do banco MYSQL:')
+PASS = getpass('Digite a senha do usuário do banco MYSQL:')
+
+#Conecta no banco MYSQL utilizando os dados de conexão digitados
+conn = create_engine("mysql+pymysql://"+USER+":"+PASS+"@"+SERVER+"/"+DB)
+
+#Sobe a tabela com dados tratados para o banco MYSQL
+df.to_sql(con=conn, name='teste_ao3_tabela_vacinacao_covid19', if_exists='append',index=False)

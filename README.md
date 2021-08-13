@@ -2,6 +2,8 @@
 Teste Profissional de Engenharia de Dados
 
 import pandas as pd
+from sqlalchemy import create_engine
+from getpass import getpass
 
 #Pega a planilha
 df = pd.read_excel(r'teste-ao3-dataset-vacinacao-covid19.xlsx')

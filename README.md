@@ -1,6 +1,9 @@
 # AO3-TEST
 Teste Profissional de Engenharia de Dados
 
+#!/usr/bin/env python
+# coding: utf-8
+
 #Bibliotecas
 import pandas as pd
 from sqlalchemy import create_engine
@@ -60,13 +63,14 @@ def PutMongo(df):
 #Solicita dados de conexão com o MongoDB
     DB = input('Digite o nome do banco MongoDB:')
     SERVER = input('Digite o nome do servidor MongoDB:')
+    PORT = input('Digite a porta do serviço MongoDB:')
     COLLECTION = input('Digite o nome da coleção do MongoDB:')
     
 #Gera um dicionário a partir dos dados tratados
     df_dict = df.to_dict('records')
 
 #Insere o dicionário com dados tratados para o MongoDB
-    pym.MongoClient('mongodb://'+SERVER+':27017/')[DB][COLLECTION].insert_many(df_dict)
+    pym.MongoClient('mongodb://'+SERVER+':'+PORT+'/')[DB][COLLECTION].insert_many(df_dict)
     print('\nDados inseridos em mongodb://'+SERVER+':27017/\n\n\n')
 
 
